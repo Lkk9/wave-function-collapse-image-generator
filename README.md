@@ -1,1 +1,1 @@
-generates image from canvas using wave function collapse algorithm
+should generate images from input image using wave function collapse algorithm
