@@ -1,7 +1,8 @@
 import React from 'react';
-import Canvas from './Canvas';
+import InputImage from './inputImage/InputImage';
+import OutputImage from './outputImage/OutputImage';
 
-import {Box} from '@mui/material';
+import {Box, Button, Paper} from '@mui/material';
 
 const App = () => {
 
@@ -14,13 +15,28 @@ const App = () => {
   }}
   >
 
-    <Box
+    <Paper
       sx={{
         width: 1/3,
+        overflow: 'hidden'
       }}
-    >
-      <Canvas/>
-    </Box>
+      ><InputImage />
+    </Paper>
+
+    <Button
+      variant='contained'
+      onClick={() => 1}
+      >generate
+    </Button>
+
+    <Paper
+      sx={{
+        width: 1/5,
+        overflow: 'hidden',
+        display: 'flex'
+      }}
+      ><OutputImage />
+    </Paper>
 
 
   </Box>

@@ -1,7 +1,7 @@
-import canvasData from './canvasData';
+import imageData from './imageData';
 
 import {combineReducers} from 'redux';
 
 export const reducers = combineReducers({
-  canvasData
+  imageData
 })
