@@ -2,9 +2,14 @@ import React from 'react';
 import InputImage from './inputImage/InputImage';
 import OutputImage from './outputImage/OutputImage';
 
-import {Box, Button, Paper} from '@mui/material';
+import {useDispatch, useSelector} from 'react-redux';
+import generateImage from '../store/actions/generateImage.js';
+
+import {Box, Button} from '@mui/material';
 
 const App = () => {
+  const dispatch = useDispatch()
+  const inputImage = useSelector(state => state.inputImageData.image)
 
   return <Box
     sx={{
@@ -15,29 +20,15 @@ const App = () => {
   }}
   >
 
-    <Paper
-      sx={{
-        width: 1/3,
-        overflow: 'hidden'
-      }}
-      ><InputImage />
-    </Paper>
+    <InputImage />
 
     <Button
       variant='contained'
-      onClick={() => 1}
+      onClick={() => dispatch(generateImage(inputImage))}
       >generate
     </Button>
 
-    <Paper
-      sx={{
-        width: 1/5,
-        overflow: 'hidden',
-        display: 'flex'
-      }}
-      ><OutputImage />
-    </Paper>
-
+    <OutputImage />
 
   </Box>
 }

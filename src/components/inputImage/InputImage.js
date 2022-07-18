@@ -2,26 +2,28 @@ import React, {useState} from 'react';
 import Tile from './Tile';
 
 import {useSelector, useDispatch} from 'react-redux';
-import setTileBackground from '../../actions/setTileBackground';
+import setTileBackground from '../../store/actions/setTileBackground';
 
-import {Box} from '@mui/material';
+import {Paper} from '@mui/material';
 
 const InputImage = () => {
   const [rerender, setRerender] = useState(false)
   const [mouseIsPressed, setMouseIsPressed] = useState(false)
 
   const dispatch = useDispatch()
-  const imageData = useSelector(state => state.imageData)
+  const imageData = useSelector(state => state.inputImageData)
 
   const imageWidth = imageData.width
   const imageHeight = imageData.height
 
-  return <Box
+  return <Paper
     sx={{
       display: 'grid',
       gridTemplateColumns: `repeat(${imageWidth}, 1fr)`,
       gridTemplateRows: `repeat(${imageHeight}, 1fr)`,
       userSelect: 'none',
+      width: 1/3,
+      overflow: 'hidden'
     }}
     onMouseDown={() => setMouseIsPressed(true)}
     onMouseUp={() => setMouseIsPressed(false)}
@@ -47,7 +49,7 @@ const InputImage = () => {
         background={background}
       />
     })]}
-  </Box>
+  </Paper>
 }
 
 export default InputImage;
