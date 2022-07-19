@@ -2,40 +2,32 @@ import ImageData from '../../helpers/imageDataClass.js';
 import Tile from '../../helpers/tileClass.js';
 
 class OutputImageData extends ImageData {
-  constructor(w, h, resolutionOfTile=120) {
-    super(w, h)
+  constructor(resolutionOfTile=120) {
+    super(1,1)
     this.resolution = resolutionOfTile//px
 
-    this.image = Array(h).fill(null).map((_,y) => Array(w).fill(null).map((_,x) => {
-
-      let c = 100
-      if ((x + y) % 2 === 0) c = 200
-
-      c = `rgb(${~~(255*x/w)}, ${~~(255*y/h)}, ${c})`
-
-      return new Tile(x, y, c)
-
-    }))
+    super.init()
   }
 
-  getImage(inputImageArray) {
+  getImage(inputImageData, inputImageSetup) {
+    super.setSize(inputImageSetup.width, inputImageSetup.height)
 
-    const minH = Math.min(inputImageArray.length, this.image.length)
-    const minW = Math.min(inputImageArray[0].length, this.image[0].length)
+    const minH = Math.min(inputImageData.image.length, this.image.length)
+    const minW = Math.min(inputImageData.image[0].length, this.image[0].length)
 
     for (let i = 0; i < minH; i++)
     for (let j = 0; j < minW; j++)
-      this.image[i][j].background = inputImageArray[i][j].background
+      this.image[i][j].background = inputImageData.image[i][j].background
 
   }
 }
 
-const initState = new OutputImageData(12, 12)
+const initState = new OutputImageData()
 
 const outputImageData = (state=initState, action) => {
   switch (action.type) {
     case 'GENERATE_IMAGE':
-      state.getImage(action.payload)
+      state.getImage(action.payload.data, action.payload.setup)
       return state
     default:
       return state

@@ -1,7 +1,10 @@
-const generateImage = (inputImageArray) => {
+const generateImage = (inputImageData, inputImageSetup) => {
   return {
     type: 'GENERATE_IMAGE',
-    payload: inputImageArray
+    payload: {
+      data: inputImageData,
+      setup: inputImageSetup
+    }
   }
 }
 

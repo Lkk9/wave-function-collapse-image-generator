@@ -7,16 +7,17 @@ import {Paper} from '@mui/material';
 const OutputImage = () => {
 
   const imageData = useSelector(state => state.outputImageData)
-  const imageWidth = imageData.width
-  const imageHeight = imageData.height
 
   const canvasRef = useRef(null)
   useEffect(() => {
     const int = setInterval(() => {
+
+    const imageWidth = imageData.width
+    const imageHeight = imageData.height
+    const resolution = imageData.resolution
+
     const canvas = canvasRef.current
 
-
-    const resolution = imageData.resolution
     canvas.width = resolution*imageWidth
     canvas.height = resolution*imageHeight
 
@@ -38,7 +39,7 @@ const OutputImage = () => {
   })
   return () => clearInterval(int)
 
-  }, [imageHeight, imageWidth, imageData.image])
+}, [])
 
 
   return <Paper

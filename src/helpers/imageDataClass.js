@@ -6,13 +6,26 @@ class ImageData {
     this.height = h
     this.image = []
 
-    for (let i = 0; i < this.height; i++) {
-      const currentRow = []
-      for (let j = 0; j < this.width; j++) {
-        currentRow.push(new Tile(j, i))
-      }
-      this.image.push(currentRow)
-    }
+    this.init()
+  }
+
+  init() {
+    this.image = Array(this.height).fill(null).map((_,y) => Array(this.width).fill(null).map((_,x) => {
+
+      let c = 100
+      if ((x + y) % 2 === 0) c = 200
+
+      c = `rgb(${~~(255*x/this.width)}, ${~~(255*y/this.height)}, ${c})`
+
+      return new Tile(x, y, c)
+
+    }))
+  }
+
+  setSize(w, h) {
+    this.width = w
+    this.height = h
+    this.init()
   }
 }
 

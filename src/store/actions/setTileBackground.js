@@ -1,12 +1,5 @@
-const setTileBackground = (x, y, background) => {
-  return {
-    type: 'SET_TILE_BACKGROUND',
-    payload: {
-      x,
-      y,
-      background
-    }
-  }
-}
+import initTileBackgroundFunctionCreator from '../../helpers/initTileBackgroundFunctionCreator.js';
+
+const setTileBackground = initTileBackgroundFunctionCreator('SET_TILE_BACKGROUND')
 
 export default setTileBackground
