@@ -2,16 +2,16 @@ import React, {useState} from 'react';
 import Tile from './Tile';
 
 import {useSelector, useDispatch} from 'react-redux';
-import setTileBackground from '../../store/actions/setTileBackground';
-import fixTileBackground from '../../store/actions/fixTileBackground';
 
 import {Paper} from '@mui/material';
 
-const InputImage = ({imageData, imageType}) => {
+const InputImage = ({selectedImageData, initTileBackgroundWith}) => {
   const [rerender, setRerender] = useState(false)
   const [mouseIsPressed, setMouseIsPressed] = useState(false)
 
   const dispatch = useDispatch()
+
+  const imageData = useSelector(selectedImageData)
 
   const imageWidth = imageData.width
   const imageHeight = imageData.height
@@ -43,10 +43,7 @@ const InputImage = ({imageData, imageType}) => {
           if (background === '#000000') currentBg = '#ff00ff'
           else currentBg = '#000000'
 
-          if (imageType === 'setup')
-            dispatch(fixTileBackground(currentX, currentY, currentBg))
-          else if (imageType === 'data')
-            dispatch(setTileBackground(currentX, currentY, currentBg))
+          dispatch(initTileBackgroundWith(currentX, currentY, currentBg))
 
           setRerender(!rerender)
         }}

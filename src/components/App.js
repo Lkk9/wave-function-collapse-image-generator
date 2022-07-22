@@ -6,8 +6,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import generateImage from '../store/actions/generateImage.js';
 import changeDataSize from '../store/actions/changeDataSize.js';
 import changeSetupSize from '../store/actions/changeSetupSize.js';
+import setTileBackground from '../store/actions/setTileBackground';
+import fixTileBackground from '../store/actions/fixTileBackground';
 
-import {Box, Button, Stack, Slider, Typography} from '@mui/material';
+import {Box, Button, Slider, Typography} from '@mui/material';
 
 const App = () => {
   const [rerender, setRerender] = useState(false)
@@ -38,8 +40,14 @@ const App = () => {
         }
       }}
     >
-      <InputImage imageData={imageData} imageType={'data'}/>
-      <InputImage imageData={imageSetup} imageType={'setup'}/>
+      <InputImage
+        selectedImageData={state => state.inputImageData}
+        initTileBackgroundWith={setTileBackground}
+      />
+      <InputImage
+        selectedImageData={state => state.inputImageSetup}
+        initTileBackgroundWith={fixTileBackground}
+      />
     </Box>
 
     <Box
